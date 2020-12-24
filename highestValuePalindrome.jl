@@ -1,3 +1,4 @@
+# link = https://www.hackerrank.com/challenges/richie-rich/problem
 function highestValuePalindrome(s, n, k)::String
     ns = s |> collect
     mp = (n ÷ 2) + 1 # integer division with \div
