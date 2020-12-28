@@ -1,8 +1,14 @@
 # link = https://www.hackerrank.com/challenges/migratory-birds
 
 function migratoryBirds(arr)
-     return sort(arr, lt=
-            (x,y)->(count(e->e==x,arr) > count(e->e==y, arr)))[1]
+     freq = Dict(k => count(e->e==k, arr) for k in arr)
+     function fcomp(x, y, f) # ad-hoc
+          f[x] == f[y] && return (x > y) ? false : true
+          f[x] > f[y] && return true
+          return false
+     end
+     sort!(arr, lt=(x,y)->fcomp(x,y,freq))
+     return arr[1]
 end
 
 n = parse(Int, readline()) # number of birds sighted in arr
