@@ -8,17 +8,12 @@ function nonDivisibleSubset(k::Int, s::Array{Int, 1})::Int
         s[i] %= k
         freq[s[i]] = get(freq, s[i], 0) + 1
     end
-    cmax = 0
-    for x in 0:(k/2)
+    cmax = min(1, get(freq, 0, 0))
+    for x in 1:(k/2)
         opp = (k - x) % k
-        to_add = max(get(freq, x, 0), get(freq, opp, 0))
-        # special cases when x == 0 and x == opp
-        if (x == 0   && get(freq, x, 0) > 0) || 
-           (x == opp && get(freq, x, 0) > 0)
-            to_add = 1    
-        end
-        cmax += to_add
+        cmax += max(get(freq, x, 0), get(freq, opp, 0))
     end
+    if k & 1 == 0 cmax += min(1, freq[k/2]) end
     return cmax
 end
 
