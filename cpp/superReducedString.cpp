@@ -33,3 +33,14 @@ int main()
 
     return 0;
 }
+
+
+/* REGEX SOLUTION
+string superReducedString(string s) {
+    std::regex dupe("(.)\\1");
+    
+    for(int x{}; x < 100; ++x)
+        s = std::regex_replace(s, dupe, "");
+    return (s.size() <= 0 ? "Empty String" : s);
+}
+*/
