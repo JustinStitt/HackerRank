@@ -24,3 +24,11 @@ public:
     }
 };
 
+/* better O(1) soln.
+ *void deleteNode(ListNode* node) {
+        ListNode* _next = node->next;
+        *node = *_next;
+        delete _next;
+    }
+ *
+ * */
