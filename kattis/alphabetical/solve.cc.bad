@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int most = 1;
+
+void dfs(int idx, int consec, const string& inp) {
+  // ...
+  most = max(most, consec);
+
+  for (int x = idx + 1; x < inp.size(); ++x) {
+    if (inp[idx] < inp[x]) {
+      dfs(x, consec + 1, inp);
+    }
+  }
+}
+
+int main() {
+  // ...
+  string inp;
+  cin >> inp;
+  for (int x{}; x < inp.size() - 1; ++x) {
+    if (inp.size() - x + 1 < most) break;
+    dfs(x, 1, inp);
+  }
+
+  std::cout << (26 - most) << "\n";
+  return 0;
+}
