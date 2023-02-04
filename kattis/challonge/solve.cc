@@ -33,9 +33,7 @@ void bfs(const matrix& mat, State* st, ll t) {
       if (i == front.idx) continue;
       ll cost = mat[front.idx][i];
       if (cost + front.cost >= best) continue;
-      set<ll> new_vis;
-      for (ll item : front.visited) new_vis.insert(item);
-      State* other = new State{i, cost + front.cost, new_vis};
+      State* other = new State{i, cost + front.cost, {}};
       Q.push(other);
     }
   }
