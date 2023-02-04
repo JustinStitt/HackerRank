@@ -5,15 +5,40 @@ using namespace std;
 using matrix = vector<vector<ll>>;
 
 struct State {
-  int idx, cost;
+  ll idx, cost;
   set<ll> visited;
 };
 
-int best = pow(2, 63);
+ll best = pow(2, 58);
 
-int bfs(const matrix& mat) {
+void bfs(const matrix& mat, State* st, ll t) {
   queue<State*> Q;
-  State* initial = new State{}
+  Q.push(st);
+
+  while (!Q.empty()) {
+    State* ptr = Q.front(); Q.pop();
+    State front = *ptr;
+    delete ptr;
+    if (front.cost >= best) {
+      continue;
+    }
+
+    front.visited.insert(front.idx);
+
+    if (front.idx == t) {
+      best = min(best, front.cost);
+    }
+
+    for (int i{}; i < mat.size(); ++i) {
+      if (i == front.idx) continue;
+      ll cost = mat[front.idx][i];
+      if (cost + front.cost >= best) continue;
+      set<ll> new_vis;
+      for (ll item : front.visited) new_vis.insert(item);
+      State* other = new State{i, cost + front.cost, new_vis};
+      Q.push(other);
+    }
+  }
 }
 
 
@@ -33,6 +58,9 @@ int main() {
     }
   }
 
+  State* initial = new State{s, 0, {}};
+  bfs(adj_mat, initial, t);
+  cout << best << "\n";
 
 
   // for (auto& row : adj_mat) {
