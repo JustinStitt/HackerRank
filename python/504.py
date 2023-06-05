@@ -15,3 +15,6 @@ class Solution:
             num //= 7
 
         return ("-" if sign == -1 else "") + "".join([str(x) for x in ans][::-1])
+
+
+# or numpy.baserepr(num, base=7)
