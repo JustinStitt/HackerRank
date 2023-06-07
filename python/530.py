@@ -12,7 +12,7 @@ class Solution:
         best = 10**18
         nodes = []
 
-        # bfs
+        # dfs
         stk = [root]
 
         while len(stk):
